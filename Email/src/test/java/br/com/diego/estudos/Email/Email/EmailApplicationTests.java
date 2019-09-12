@@ -1,0 +1,16 @@
+package br.com.diego.estudos.Email.Email;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class EmailApplicationTests {
+
+	@Test
+	public void contextLoads() {
+	}
+
+}
