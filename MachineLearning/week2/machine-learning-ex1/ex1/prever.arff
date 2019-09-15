@@ -1,0 +1,6 @@
+@relation Casa
+@attribute 'Tamanho' real
+@attribute 'Quartos' real
+@attribute 'Preco' real
+@data
+1650,3,?
