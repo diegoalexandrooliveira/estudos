@@ -1,0 +1,44 @@
+Start a minikube
+
+    minikube start
+
+View nodes
+
+    kubectl get nodes
+
+Run an image
+    
+    kubectl run kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080
+
+View deployments
+
+    kubectl get deployments
+
+View pods and the deployments name
+
+    kubectl get pods
+
+Delete a pod
+    
+    kubectl delete pod $POD_NAME
+
+Delete a deployment
+    
+    kubectl delete deployment $DEPLOYMENT_NAME
+
+To access the image, a proxy is needed
+
+    kubectl proxy
+
+View logs
+
+    kubectl logs $POD_NAME
+
+Enter the container
+
+    kubectl exec -ti $POD_NAME bash
+
+Inside the container is possible to access the application using curl command
+
+
+    
