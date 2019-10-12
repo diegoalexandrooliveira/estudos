@@ -1,1 +1,5 @@
- 
+Run .war with PayaraMicro
+
+First you need to navigate to jre 8 local path
+
+./java -jar /home/diego/Downloads/payara-micro-5.193.jar --deploy /home/diego/workspace-estudos/Backend/acmecustomers/api/target/acme-customers-api-1.0.0-SNAPSHOT.war 
