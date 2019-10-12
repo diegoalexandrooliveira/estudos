@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.acme</groupId>
+    <artifactId>acme-customers</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>lib</module>
+        <module>api</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <properties>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEnconding>UTF-8</project.build.sourceEnconding>
+        <project.reporting.outputEnconding>UTF-8</project.reporting.outputEnconding>
+
+        <payara-micro.version>5.193</payara-micro.version>
+        <!--        <payara-micro.version>4.1.2.173</payara-micro.version>-->
+        <javaee.version>7.0</javaee.version>
+
+
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>${javaee.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>fish.payara.extras</groupId>
+                <artifactId>payara-embedded-web</artifactId>
+                <version>${payara-micro.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+</project>
