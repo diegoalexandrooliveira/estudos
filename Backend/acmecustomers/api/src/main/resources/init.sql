@@ -1,0 +1,2 @@
+INSERT INTO customers (id, first_name, last_name, status, email, date_of_birth, created_at, updated_at) VALUES ('1234', 'Kate', 'Jones', 'ACTIVE', 'kate.jones@acme.com', NOW(), NOW(), NOW());
+INSERT INTO customers (id, first_name, last_name, status, email, date_of_birth, created_at, updated_at) VALUES ('1235', 'James', 'Jones', 'ACTIVE', 'james.jones@acme.com', NOW(), NOW(), NOW());
