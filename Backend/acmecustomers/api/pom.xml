@@ -56,16 +56,40 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-war-plugin</artifactId> -->
+			<!-- <version>3.2.3</version> -->
+			<!-- <configuration> -->
+			<!-- <outputDirectory>/home/diego/applicationServers/payara5/glassfish/domains/domain1/autodeploy</outputDirectory> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
+
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<outputDirectory>/home/diego/applicationServers/payara5/glassfish/domains/domain1/autodeploy</outputDirectory>
-				</configuration>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources-payara</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>/home/diego/applicationServers/payara5/glassfish/domains/domain1/autodeploy</outputDirectory>
+							<resources>
+								<resource>
+									<directory>target</directory>
+									<includes>
+										<include>acme-customers-api-1.0.0-SNAPSHOT.war</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
-
 		</plugins>
-
 
 	</build>
 

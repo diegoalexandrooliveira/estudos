@@ -17,9 +17,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.acme.customers.api.rest.v1.services.CustomerService;
-import com.acme.customers.api.rest.v1.services.exceptions.EmptyPayloadException;
-import com.acme.customers.api.rest.v1.services.exceptions.IdMismatchException;
-import com.acme.customers.api.rest.v1.services.exceptions.ResourceNotFoundException;
 import com.acme.customers.lib.v1.Customer;
 
 @Path("/customers")
