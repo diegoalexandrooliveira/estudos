@@ -1,23 +1,35 @@
 package br.com.diego.estudos.movierecommendation.movies.domain;
 
 
-import javax.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.time.Year;
 
+@ToString
 @Entity(name = "movies")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
 
     @Id
+    @JsonProperty(value = "imdbID")
     private String imdbId;
 
+    @JsonProperty(value = "Title")
     private String title;
 
-    private Year year;
+    @JsonProperty(value = "Year")
+    private Long year;
 
-    private String posterUrl;
+    @JsonProperty(value = "Poster")
+    private String urlPoster;
 
+    @JsonProperty(value = "Metascore")
     private Long metascore;
+
+    @JsonProperty(value = "Genre")
+    private String genre;
 
 }
