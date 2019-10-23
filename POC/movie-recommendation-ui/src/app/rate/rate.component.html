@@ -1,0 +1,12 @@
+<po-select name="select" p-label="Who are you?" [p-options]="usersSelect" [(ngModel)]="user"
+    (p-change)="onChangeUser()">
+</po-select>
+<div class="po-row">
+
+    <po-widget *ngFor="let movie of movies" class="po-lg-3 po-mt-2" p-height="400" p-primary="true"
+        p-title="{{movie.getTitle()}}">
+        <div class="po-text-center">
+            <img src="{{movie.getUrlPoster()}}" style="height: 210px">
+        </div>
+    </po-widget>
+</div>
