@@ -11,5 +11,5 @@ spring:
     show-sql: true
 movie-recommendation:
   omdbapi:
-    key: 6bebabb6
+    key:
     url: http://www.omdbapi.com/
