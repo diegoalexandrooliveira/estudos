@@ -1,6 +1,6 @@
 export class Movie {
     constructor(private imdbId: String, private title: String, private year: Number,
-        private urlPoster: String, private metascore: Number, private genre: String) {
+        private urlPoster: String, private metascore: Number, private genre: String, private stars: Object[]) {
     }
 
 
@@ -21,5 +21,12 @@ export class Movie {
     }
     public getGenre(): String {
         return this.genre;
+    }
+
+    public getStars(): Object[] {
+        return this.stars;
+    }
+    public setStars(stars: Object[]) {
+        this.stars = stars;
     }
 }
