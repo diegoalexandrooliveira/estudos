@@ -1,14 +1,7 @@
-export class User {
+import { IUser } from './IUser';
 
-    constructor(private id: Number, private name: String) {
+export class User implements IUser {
 
-    }
-
-    public getId(): Number {
-        return this.id;
-    }
-
-    public getName(): String {
-        return this.name;
+    constructor(public id: Number, public name: String) {
     }
 }

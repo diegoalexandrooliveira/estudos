@@ -1,16 +1,7 @@
-export class MovieRate {
-    constructor(private id: Number,private movieImdbId: String, private userId: Number, private rate: Number) {
-    }
+import { IMovieRate } from './IMovieRate';
 
-    public getMovieImdbId(): String {
-        return this.movieImdbId;
-    }
-    
-    public getUserId(): Number {
-        return this.userId;
-    }
-    
-    public getRate(): Number {
-        return this.rate;
+export class MovieRate implements IMovieRate {
+    constructor(public id: Number, public movieImdbId: String, public userId: Number,
+        public rate: Number) {
     }
 }

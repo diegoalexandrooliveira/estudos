@@ -4,26 +4,26 @@
     </po-select>
 </div>
 <div class="po-row" *ngIf="user">
-    <po-button class="po-lg-3" p-label="Delete all rates" (p-click)="deleteAllRates()" p-icon="po-icon-delete">
-    </po-button>
-</div>
-<div class="po-row" *ngIf="user">
     <span class="po-field-title po-lg-3">Rate a movie</span>
 </div>
 
 <div class="po-row" *ngIf="user">
     <po-widget *ngFor="let movie of movies" class="po-lg-3 po-mt-2" p-height="420" p-primary="true"
-        p-title="{{movie.getTitle()}}" p-background="assets/background.png">
+        p-title="{{movie.title}}" p-background="assets/background.png">
         <div class="po-text-center">
-            <img src="{{movie.getUrlPoster()}}" style="height: 200px">
-            <p><b>Genre: </b>{{movie.getGenre()}}</p>
-            <p><b>Year: </b>{{movie.getYear()}}</p>
-            <p><b>Metascore: </b>{{movie.getMetascore()}}</p>
+            <img src="{{movie.urlPoster}}" style="height: 200px">
+            <p><b>Genre: </b>{{movie.genre}}</p>
+            <p><b>Year: </b>{{movie.year}}</p>
+            <p><b>Metascore: </b>{{movie.metascore}}</p>
 
-            <a *ngFor="let star of movie.getStars()" (click)="onRate(star, movie)">
+            <a *ngFor="let star of movie.stars" (click)="onRate(star, movie)">
                 <img *ngIf="!star.rated" src="assets/not_rated.png" style="height: 35px;">
                 <img *ngIf="star.rated" src="assets/rated.png" style="height: 35px;">
             </a>
         </div>
     </po-widget>
+</div>
+<div class="po-row" *ngIf="user">
+    <po-button class="po-lg-3" p-label="Delete all rates" (p-click)="deleteAllRates()" p-icon="po-icon-delete">
+    </po-button>
 </div>

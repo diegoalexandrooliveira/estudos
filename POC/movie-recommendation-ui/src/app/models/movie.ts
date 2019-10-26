@@ -1,32 +1,8 @@
 export class Movie {
-    constructor(private imdbId: String, private title: String, private year: Number,
-        private urlPoster: String, private metascore: Number, private genre: String, private stars: Object[]) {
+
+    constructor(public imdbId: String, public title: String, public year: Number,
+        public urlPoster: String, public metascore: Number, public genre: String,
+        public stars: Object[]) {
     }
 
-
-    public getImdbId(): String {
-        return this.imdbId;
-    }
-    public getTitle(): String {
-        return this.title;
-    }
-    public getYear(): Number {
-        return this.year;
-    }
-    public getUrlPoster(): String {
-        return this.urlPoster;
-    }
-    public getMetascore(): Number {
-        return this.metascore;
-    }
-    public getGenre(): String {
-        return this.genre;
-    }
-
-    public getStars(): Object[] {
-        return this.stars;
-    }
-    public setStars(stars: Object[]) {
-        this.stars = stars;
-    }
 }

@@ -26,6 +26,6 @@ public class LoadDatabase implements CommandLineRunner {
                 .map(MoviesList::getImdb_id)
                 .filter(imdb_id -> movieRepository.findById(imdb_id).isEmpty())
                 .map(omdbRepository::findMovieById)
-                .forEach(optionalMovie -> optionalMovie.ifPresent(movie -> movieRepository.save(movie)));
+                .forEach(optionalMovie -> optionalMovie.ifPresent(movieRepository::save));
     }
 }
