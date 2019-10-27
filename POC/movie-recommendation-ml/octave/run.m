@@ -22,7 +22,7 @@ fprintf('\nTraining collaborative filtering...\n');
 %  Useful Values
 num_users = size(Y, 2);
 num_movies = size(Y, 1);
-num_features = 2;
+num_features = 50;
 
 % Set Initial Parameters (Theta, X)
 X = randn(num_movies, num_features);
@@ -34,7 +34,7 @@ initial_parameters = [X(:); Theta(:)];
 options = optimset('GradObj', 'on', 'MaxIter', 100);
 
 % Set Regularization
-lambda = 0.01;
+lambda = 0.001;
 theta = fmincg (@(t)(cofiCostFunc(t, Ynorm, R, num_users, num_movies, ...
                                 num_features, lambda)), ...
                 initial_parameters, options);
@@ -52,6 +52,8 @@ fprintf('Recommender system learning completed.\n');
 %  the predictions matrix.
 %
 
+[movies, users] = loadMoviesAndUsers();
+
 p = X * Theta';
 %my_predictions = p(:,1) + Ymean;
 
@@ -59,8 +61,15 @@ p = X * Theta';
 ##display(p(:,1) + Ymean);
 ##fprintf('Predicting rating for user 2\n');
 ##display(p(:,2) + Ymean);
-[r, ix] = sort(p, 'descend');
-display(ix);
+for j=1:size(users)
+  [r, ix] = sort(p(:,j), 'descend');
+   fprintf('\nTop recommendations for %s', users{j});
+    for i=1:10
+      m = ix(i);
+      fprintf('%s: Theta: %.1f Median: %.1f \n',strtrim(movies{m}), p(m,j), Ymean(m));
+end
+endfor
+
 
 ##pause();
 ##%movieList = loadMovieList();
