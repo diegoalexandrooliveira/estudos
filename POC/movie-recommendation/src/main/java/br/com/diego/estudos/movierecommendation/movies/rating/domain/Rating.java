@@ -1,4 +1,4 @@
-package br.com.diego.estudos.movierecommendation.movies.rate.domain;
+package br.com.diego.estudos.movierecommendation.movies.rating.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Rate {
+public class Rating {
 
     @Id
     @GeneratedValue
@@ -25,5 +25,5 @@ public class Rate {
     private Long userId;
 
     @Getter
-    private Long rate;
+    private Long rating;
 }

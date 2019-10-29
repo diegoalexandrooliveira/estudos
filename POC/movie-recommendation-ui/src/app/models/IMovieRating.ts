@@ -1,6 +1,6 @@
-export interface IMovieRate {
+export interface IMovieRating {
     id: Number;
     movieImdbId: String;
     userId: Number;
-    rate: Number;
+    rating: Number;
 }

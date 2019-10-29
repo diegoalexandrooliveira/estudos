@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie';
-import { User } from '../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MovieRate } from '../models/movieRate';
 import { IUser } from '../models/IUser';
-import { IMovieRate } from '../models/IMovieRate';
+import { IMovieRating } from '../models/IMovieRating';
+import { MovieRating } from '../models/movieRating';
 
 @Component({
   selector: 'app-rate',
@@ -33,10 +32,10 @@ export class RateComponent implements OnInit {
   onChangeUser() {
     let promises: Promise<Object>[] = [];
     promises.push(this.httpClient.get("http://localhost:8080/movies").toPromise());
-    promises.push(this.httpClient.get<IMovieRate[]>("http://localhost:8080/rates/" + this.user).toPromise<IMovieRate[]>());
+    promises.push(this.httpClient.get<IMovieRating[]>("http://localhost:8080/ratings/" + this.user).toPromise<IMovieRating[]>());
 
     Promise.all(promises).then(resolvedPromises => {
-      let ratedMovies = <MovieRate[]>resolvedPromises[1];
+      let ratedMovies = <MovieRating[]>resolvedPromises[1];
 
       let moviesResponse = <any[]>resolvedPromises[0];
 
@@ -51,10 +50,10 @@ export class RateComponent implements OnInit {
           movie["Metascore"],
           movie["Genre"], null);
 
-        let movieRate: MovieRate = ratedMovies.find(ratedMovie => newMovie.imdbId == ratedMovie.movieImdbId);
+        let movieRate: MovieRating = ratedMovies.find(ratedMovie => newMovie.imdbId == ratedMovie.movieImdbId);
         if (movieRate) {
           rate = rate.map(value => {
-            return { id: value["id"], rated: value["id"] <= movieRate.rate }
+            return { id: value["id"], rated: value["id"] <= movieRate.rating }
           });
         }
         newMovie.stars = rate;
@@ -78,15 +77,15 @@ export class RateComponent implements OnInit {
       }
       return starElement;
     });
-    let movieRate = new MovieRate(undefined, movie.imdbId, this.user, star["id"]);
+    let movieRate = new MovieRating(undefined, movie.imdbId, this.user, star["id"]);
     let headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.httpClient.post("http://localhost:8080/rates", JSON.stringify(movieRate), {
+    this.httpClient.post("http://localhost:8080/ratings", JSON.stringify(movieRate), {
       headers: headers
     }).subscribe();
   }
 
   deleteAllRates() {
-    this.httpClient.delete("http://localhost:8080/rates/" + this.user).subscribe(() => this.onChangeUser());
+    this.httpClient.delete("http://localhost:8080/ratings/" + this.user).subscribe(() => this.onChangeUser());
 
   }
 

@@ -1,0 +1,35 @@
+
+select * from crosstab(
+'select title::text, user_id::text, rate::text 
+from (
+	select movie_users.title title, movie_users.id user_id, COALESCE(r.rate, 0, r.rate) rate
+	from
+	(select m.title, m.imdb_id, u.id from movies m, user_ u) movie_users left outer join rate r 
+	on r.user_id = movie_users.id
+	and r.movie_imdb_id = movie_users.imdb_id	 
+	 )
+as movie_users
+	order by 1,2')
+AS t("Movie" text, "Diego" text, "João" text, "Maria" text, "Carlos" text
+	, "Jorge" text, "Juliana" text, "Patricia" text, "Carla" text
+	, "Sabrina" text, "Lais" text, "Alan" text, "Vitor" text);
+	
+select * from crosstab(
+'select title::text, user_id::text, rate::text 
+from (
+	select movie_users.title title, movie_users.id user_id, (CASE WHEN r.rate IS NULL
+	THEN 0 ELSE 1 END) rate
+	from
+	(select m.title, m.imdb_id, u.id from movies m, user_ u) movie_users left outer join rate r 
+	on r.user_id = movie_users.id
+	and r.movie_imdb_id = movie_users.imdb_id	 
+	 )
+as movie_users
+	order by 1,2')
+AS t("Movie" text, "Diego" text, "João" text, "Maria" text, "Carlos" text
+	, "Jorge" text, "Juliana" text, "Patricia" text, "Carla" text
+	, "Sabrina" text, "Lais" text, "Alan" text, "Vitor" text);
+
+
+
+CREATE EXTENSION IF NOT EXISTS tablefunc;

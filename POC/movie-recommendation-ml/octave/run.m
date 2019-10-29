@@ -8,7 +8,10 @@ fprintf('\nTraining collaborative filtering...\n');
 %  Load data
 %load('ex8_movies.mat');
 
-[Y, R] = loadRates();
+% [Y, R] = loadRates();
+
+Ynorm = [1 1 2 2.5 4.5 3;2 2 4 4 5 0];
+R = [1 1 1 1 1 1;1 1 1 1 1 0];
 
 %  Y is a 18x4 matrix, containing ratings (1-5) of 18 movies by 
 %  4 users
@@ -17,12 +20,12 @@ fprintf('\nTraining collaborative filtering...\n');
 %  rating to movie i
 
 %  Normalize Ratings
-[Ynorm, Ymean] = normalizeRatings(Y, R);
+%[Ynorm, Ymean] = normalizeRatings(Y, R);
 
 %  Useful Values
-num_users = size(Y, 2);
-num_movies = size(Y, 1);
-num_features = 50;
+num_users = size(Ynorm, 2);
+num_movies = size(Ynorm, 1);
+num_features = 2;
 
 % Set Initial Parameters (Theta, X)
 X = randn(num_movies, num_features);
