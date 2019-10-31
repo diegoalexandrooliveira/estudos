@@ -3,6 +3,9 @@ package br.com.diego.estudos.movierecommendation.movies.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
@@ -11,6 +14,9 @@ import javax.persistence.Id;
 @ToString
 @Entity(name = "movies")
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Movie {
 
     @Id

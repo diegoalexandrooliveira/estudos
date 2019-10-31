@@ -1,15 +1,13 @@
 package br.com.diego.estudos.movierecommendation.movies.rating.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class Rating {
 
     @Id
