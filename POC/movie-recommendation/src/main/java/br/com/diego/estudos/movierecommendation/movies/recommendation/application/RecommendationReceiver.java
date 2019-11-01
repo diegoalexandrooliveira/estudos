@@ -30,6 +30,4 @@ public class RecommendationReceiver {
         List<Recommendation> recommendations = recommendationsDTO.stream().map(RecommendationAssembler::fromDTO).collect(Collectors.toList());
         recommendationService.receiveRecommendations(recommendations);
     }
-
-
 }

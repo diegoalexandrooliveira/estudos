@@ -10,21 +10,21 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  public pageName: String = "Rate";;
+  public pageName: String = "Rating";
 
   constructor(private router: Router) {
 
   }
 
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Rate', action: this.rate.bind(this) },
+    { label: 'Rating', action: this.rate.bind(this) },
 
     { label: 'Recommendation', action: this.recommendation.bind(this) }
   ];
 
   private rate() {
-    this.pageName = "Rate";
-    this.router.navigateByUrl("/rate");
+    this.pageName = "Rating";
+    this.router.navigateByUrl("/rating");
   }
 
   private recommendation() {

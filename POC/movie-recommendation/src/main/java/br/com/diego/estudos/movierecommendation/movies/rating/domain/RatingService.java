@@ -1,9 +1,6 @@
 package br.com.diego.estudos.movierecommendation.movies.rating.domain;
 
 
-import br.com.diego.estudos.movierecommendation.movies.application.RabbitMQConfiguration;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +29,11 @@ public class RatingService {
             throw new Exception("Invalid rate.");
         }
 
-        Rating ratingFound = ratingRepository.findByMovieImdbIdAndUserId(rating.getMovieImdbId(), rating.getUserId());
-        rating.setId(Optional.ofNullable(ratingFound).isEmpty() ? null : ratingFound.getId());
-        rating = ratingRepository.save(rating);
 
-        sendRatingsToMessageBroker();
+        Rating ratingFound = ratingRepository.findByMovieImdbIdAndUserId(rating.getMovie().getImdbId(), rating.getUser().getId());
+        rating.setId(Optional.ofNullable(ratingFound).isEmpty() ? null : ratingFound.getId());
+
+        rating = ratingRepository.save(rating);
 
         return rating;
     }
@@ -46,17 +43,13 @@ public class RatingService {
         return ratingRepository.findByUserId(userId);
     }
 
-    public void deleteByUserId(Long userId) throws JsonProcessingException {
-        sendRatingsToMessageBroker();
+    public List<Rating> findAll() {
+        return ratingRepository.findAll();
+    }
+
+    public void deleteByUserId(Long userId) {
         ratingRepository.deleteByUserId(userId);
     }
 
 
-    public void sendRatingsToMessageBroker() throws JsonProcessingException {
-        List<Rating> ratings = ratingRepository.findAll();
-
-        String json = new ObjectMapper().writeValueAsString(ratings);
-
-        rabbitTemplate.convertAndSend(RabbitMQConfiguration.queueForSend, json);
-    }
 }

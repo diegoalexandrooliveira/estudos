@@ -1,27 +1,30 @@
 package br.com.diego.estudos.movierecommendation.movies.rating.domain;
 
+import br.com.diego.estudos.movierecommendation.movies.domain.Movie;
+import br.com.diego.estudos.movierecommendation.user.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
+@Setter
 public class Rating {
 
     @Id
     @GeneratedValue
-    @Setter
-    @Getter
     private Long id;
 
-    @Getter
-    private String movieImdbId;
+    @ManyToOne
+    @JoinColumn(name = "movie_imdb_id")
+    private Movie movie;
 
-    @Getter
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Getter
     private Long rating;
 }

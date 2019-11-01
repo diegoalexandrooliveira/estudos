@@ -1,1 +1,21 @@
-<p>recommendation works!</p>
+<div class="po-row">
+    <po-select name="select" p-label="Who is there?" [p-options]="usersSelect" [(ngModel)]="user"
+        (p-change)="onChangeUser()" class="po-lg-3">
+    </po-select>
+</div>
+<div class="po-row" *ngIf="user">
+    <span *ngIf="movies.length" class="po-field-title po-lg-3">Recommendations</span>
+    <span *ngIf="!movies.length" class="po-field-title po-lg-3">No recommendations</span>
+</div>
+
+<div class="po-row" *ngIf="user">
+    <po-widget *ngFor="let movie of movies" class="po-lg-3 po-mt-2 po-sm-4" p-height="370" p-primary="true"
+        p-title="{{movie.title}}" p-background="assets/background.png">
+        <div class="po-text-center">
+            <img src="{{movie.urlPoster}}" style="height: 200px">
+            <p><b>Genre: </b>{{movie.genre}}</p>
+            <p><b>Year: </b>{{movie.year}}</p>
+            <p><b>Metascore: </b>{{movie.metascore}}</p>
+        </div>
+    </po-widget>
+</div>

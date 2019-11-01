@@ -6,11 +6,11 @@ import { IMovieRating } from '../models/IMovieRating';
 import { MovieRating } from '../models/movieRating';
 
 @Component({
-  selector: 'app-rate',
-  templateUrl: './rate.component.html',
-  styleUrls: ['./rate.component.css']
+  selector: 'app-rating',
+  templateUrl: './rating.component.html',
+  styleUrls: ['./rating.component.css']
 })
-export class RateComponent implements OnInit {
+export class RatingComponent implements OnInit {
 
   public usersSelect: Object[] = [];
 
@@ -50,7 +50,7 @@ export class RateComponent implements OnInit {
           movie["Metascore"],
           movie["Genre"], null);
 
-        let movieRate: MovieRating = ratedMovies.find(ratedMovie => newMovie.imdbId == ratedMovie.movieImdbId);
+        let movieRate: MovieRating = ratedMovies.find(ratedMovie => newMovie.imdbId == ratedMovie.imdb_id);
         if (movieRate) {
           rate = rate.map(value => {
             return { id: value["id"], rated: value["id"] <= movieRate.rating }
@@ -86,7 +86,6 @@ export class RateComponent implements OnInit {
 
   deleteAllRates() {
     this.httpClient.delete("http://localhost:8080/ratings/" + this.user).subscribe(() => this.onChangeUser());
-
   }
 
 }

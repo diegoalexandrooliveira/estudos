@@ -1,8 +1,7 @@
 package br.com.diego.estudos.movierecommendation.movies.rating.application;
 
 
-import br.com.diego.estudos.movierecommendation.movies.rating.domain.Rating;
-import br.com.diego.estudos.movierecommendation.movies.rating.domain.RatingService;
+import br.com.diego.estudos.movierecommendation.movies.rating.application.dto.RatingDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +14,20 @@ import java.util.List;
 public class RatingController {
 
     @Autowired
-    private RatingService ratingService;
+    private RatingAppService ratingAppService;
 
     @GetMapping("/{userId}")
-    public List<Rating> findRatingsByUser(@PathVariable("userId") Long userId) {
-        return ratingService.findByUserId(userId);
+    public List<RatingDTO> findRatingsByUser(@PathVariable("userId") Long userId) {
+        return ratingAppService.findByUserId(userId);
     }
 
     @PostMapping
-    public Rating addRating(@RequestBody Rating rating) throws Exception {
-        return ratingService.addRating(rating);
+    public RatingDTO addRating(@RequestBody RatingDTO ratingDTO) throws Exception {
+        return ratingAppService.addRating(ratingDTO);
     }
 
     @DeleteMapping("/{userId}")
     public void deleteByUser(@PathVariable("userId") Long userId) throws JsonProcessingException {
-        ratingService.deleteByUserId(userId);
+        ratingAppService.deleteByUserId(userId);
     }
 }

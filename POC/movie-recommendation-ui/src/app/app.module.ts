@@ -4,20 +4,20 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { PoModule } from '@portinari/portinari-ui';
 import { RouterModule, Routes } from '@angular/router';
-import { RateComponent } from './rate/rate.component';
+import { RatingComponent } from './rating/rating.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
-  { path: 'rate', component: RateComponent },
+  { path: 'rating', component: RatingComponent },
   { path: 'recommendation', component: RecommendationComponent },
-  { path: '**', component: RateComponent }
+  { path: '**', component: RatingComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    RateComponent,
+    RatingComponent,
     RecommendationComponent
   ],
   imports: [

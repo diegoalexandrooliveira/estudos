@@ -1,6 +1,6 @@
 export interface IMovieRating {
     id: Number;
-    movieImdbId: String;
-    userId: Number;
+    imdb_id: String;
+    user_id: Number;
     rating: Number;
 }
