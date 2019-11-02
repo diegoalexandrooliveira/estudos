@@ -3,27 +3,53 @@
         (p-change)="onChangeUser()" class="po-lg-3">
     </po-select>
 </div>
-<div class="po-row" *ngIf="user">
-    <span class="po-field-title po-lg-3">Rating a movie</span>
-</div>
 
-<div class="po-row" *ngIf="user">
-    <po-widget *ngFor="let movie of movies" class="po-lg-3 po-mt-2 po-sm-4" p-height="420" p-primary="true"
-        p-title="{{movie.title}}" p-background="assets/background.png">
-        <div class="po-text-center">
-            <img src="{{movie.urlPoster}}" style="height: 200px">
-            <p><b>Genre: </b>{{movie.genre}}</p>
-            <p><b>Year: </b>{{movie.year}}</p>
-            <p><b>Metascore: </b>{{movie.metascore}}</p>
+<po-tabs *ngIf="user">
+        <po-tab p-label="Ratings" p-active="true">
 
-            <a *ngFor="let star of movie.stars" (click)="onRate(star, movie)">
-                <img *ngIf="!star.rated" src="assets/not_rated.png" style="height: 35px;">
-                <img *ngIf="star.rated" src="assets/rated.png" style="height: 35px;">
-            </a>
-        </div>
-    </po-widget>
-</div>
-<div class="po-row" *ngIf="user">
-    <po-button class="po-lg-3" p-label="Delete all rates" (p-click)="deleteAllRates()" p-icon="po-icon-delete">
-    </po-button>
-</div>
+                <div class="po-row" *ngIf="user">
+                        <po-widget *ngFor="let movie of movies" class="po-lg-2 po-mt-2 po-sm-4" p-height="420" p-primary="true"
+                            p-title="{{movie.title}}" p-background="assets/background.png">
+                            <div class="po-text-center">
+                                <img src="{{movie.urlPoster}}" style="height: 200px">
+                                <p><b>Genre: </b>{{movie.genre}}</p>
+                                <p><b>Year: </b>{{movie.year}}</p>
+                                <p><b>Metascore: </b>{{movie.metascore}}</p>                    
+                                <a *ngFor="let star of movie.stars" (click)="onRate(star, movie)">
+                                    <img *ngIf="!star.rated" src="assets/not_rated.png" style="height: 25px;">
+                                    <img *ngIf="star.rated" src="assets/rated.png" style="height: 25px;">
+                                </a>
+                            </div>
+                        </po-widget>
+                    </div>
+                    <po-divider></po-divider>
+                    <div class="po-row" *ngIf="user" class="po-text-center">
+                        <po-button class="po-lg-3" p-label="Delete all ratings" (p-click)="deleteAllRatings()" p-icon="po-icon-delete">
+                        </po-button>
+                    </div>
+
+
+        </po-tab>
+        <po-tab p-label="Recommendations" (p-click)="loadRecommendations()">
+
+                <div class="po-row" *ngIf="user && !recommendedMovies.length">                        
+                        <span class="po-field-title po-lg-3">No recommendations for you</span>
+                </div>
+                    
+                    <div class="po-row" *ngIf="user">
+                        <po-widget *ngFor="let movie of recommendedMovies" class="po-lg-2 po-mt-2 po-sm-4" p-height="370" p-primary="true"
+                            p-title="{{movie.title}}" p-background="assets/background.png">
+                            <div class="po-text-center">
+                                <img src="{{movie.urlPoster}}" style="height: 200px">
+                                <p><b>Genre: </b>{{movie.genre}}</p>
+                                <p><b>Year: </b>{{movie.year}}</p>
+                                <p><b>Metascore: </b>{{movie.metascore}}</p>
+                            </div>
+                        </po-widget>
+                    </div>
+
+
+        </po-tab>
+</po-tabs>
+
+

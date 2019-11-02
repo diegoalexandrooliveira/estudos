@@ -18,6 +18,8 @@ export class RatingComponent implements OnInit {
 
   public movies: Movie[] = [];
 
+  public recommendedMovies: Movie[] = [];
+
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
@@ -50,7 +52,8 @@ export class RatingComponent implements OnInit {
           movie["Metascore"],
           movie["Genre"], null);
 
-        let movieRate: MovieRating = ratedMovies.find(ratedMovie => newMovie.imdbId == ratedMovie.imdb_id);
+        let movieRate: MovieRating = ratedMovies
+          .find(ratedMovie => newMovie.imdbId == ratedMovie.imdb_id);
         if (movieRate) {
           rate = rate.map(value => {
             return { id: value["id"], rated: value["id"] <= movieRate.rating }
@@ -60,6 +63,7 @@ export class RatingComponent implements OnInit {
         return newMovie;
       });
     });
+    this.loadRecommendations();
   }
 
   onRate(star, movie: Movie) {
@@ -84,8 +88,16 @@ export class RatingComponent implements OnInit {
     }).subscribe();
   }
 
-  deleteAllRates() {
+  deleteAllRatings() {
     this.httpClient.delete("http://localhost:8080/ratings/" + this.user).subscribe(() => this.onChangeUser());
+  }
+
+  public loadRecommendations() {
+    this.httpClient.get("http://localhost:8080/recommendations/" + this.user)
+      .subscribe((movies: Object[]) => {
+        this.recommendedMovies = movies.map(movie => new Movie(movie["imdbID"], movie["Title"],
+          movie["Year"], movie["Poster"], movie["Metascore"], movie["Genre"], undefined));
+      });
   }
 
 }

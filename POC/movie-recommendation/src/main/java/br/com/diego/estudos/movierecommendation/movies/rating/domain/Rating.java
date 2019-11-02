@@ -7,13 +7,12 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@NoArgsConstructor
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Rating {
-
     @Id
     @GeneratedValue
     private Long id;
