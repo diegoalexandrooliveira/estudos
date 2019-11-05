@@ -12,15 +12,19 @@ import br.com.estudos.diego.JPA.carro.fabricante.domain.FabricanteRepository;
 import br.com.estudos.diego.JPA.carro.modelo.domain.Categoria;
 import br.com.estudos.diego.JPA.carro.modelo.domain.Modelo;
 import br.com.estudos.diego.JPA.carro.modelo.domain.ModeloRepository;
+import br.com.estudos.diego.JPA.pessoa.domain.Motorista;
+import br.com.estudos.diego.JPA.pessoa.domain.MotoristaRepository;
+import br.com.estudos.diego.JPA.pessoa.domain.Pessoa;
+import br.com.estudos.diego.JPA.pessoa.domain.Sexo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 @Component
 public class Runner implements CommandLineRunner {
@@ -36,8 +40,11 @@ public class Runner implements CommandLineRunner {
     @Autowired
     private AluguelRepository aluguelRepository;
 
+    @Autowired
+    private MotoristaRepository motoristaRepository;
+
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         Fabricante vw = Fabricante.builder().nome("VW").build();
 
@@ -85,6 +92,17 @@ public class Runner implements CommandLineRunner {
                 .build();
 
         aluguelRepository.save(aluguelGol);
+
+        Motorista diego = Motorista.builder()
+                .numeroCNH("1010")
+                .cpf("408596")
+                .dataNascimento(LocalDate.now())
+                .nome("Diego")
+                .sexo(Sexo.MASCULINO)
+                .build();
+
+        motoristaRepository.save(diego);
+
 
 
     }
