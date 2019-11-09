@@ -10,3 +10,4 @@ spring:
       ddl-auto: create
     show-sql: true
     format-sql: true
+    open-in-view: false

@@ -1,109 +1,52 @@
 package br.com.estudos.diego.JPA;
 
-import br.com.estudos.diego.JPA.aluguel.domain.Aluguel;
-import br.com.estudos.diego.JPA.aluguel.domain.AluguelRepository;
-import br.com.estudos.diego.JPA.aluguel.domain.ApoliceSeguro;
-import br.com.estudos.diego.JPA.carro.acessorio.domain.Acessorio;
-import br.com.estudos.diego.JPA.carro.acessorio.domain.AcessorioRepository;
-import br.com.estudos.diego.JPA.carro.domain.Carro;
-import br.com.estudos.diego.JPA.carro.domain.CarroRepository;
-import br.com.estudos.diego.JPA.carro.fabricante.domain.Fabricante;
-import br.com.estudos.diego.JPA.carro.fabricante.domain.FabricanteRepository;
-import br.com.estudos.diego.JPA.carro.modelo.domain.Categoria;
-import br.com.estudos.diego.JPA.carro.modelo.domain.Modelo;
-import br.com.estudos.diego.JPA.carro.modelo.domain.ModeloRepository;
-import br.com.estudos.diego.JPA.pessoa.domain.Motorista;
-import br.com.estudos.diego.JPA.pessoa.domain.MotoristaRepository;
-import br.com.estudos.diego.JPA.pessoa.domain.Pessoa;
-import br.com.estudos.diego.JPA.pessoa.domain.Sexo;
+import br.com.estudos.diego.JPA.pessoa.domain.Contas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class Runner implements CommandLineRunner {
 
-    @Autowired
-    private FabricanteRepository fabricanteRepository;
-    @Autowired
-    private ModeloRepository modeloRepository;
-    @Autowired
-    private AcessorioRepository acessorioRepository;
-    @Autowired
-    private CarroRepository carroRepository;
-    @Autowired
-    private AluguelRepository aluguelRepository;
 
     @Autowired
-    private MotoristaRepository motoristaRepository;
+    private TestesService testesService;
 
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws IOException {
 
-        Fabricante vw = Fabricante.builder().nome("VW").build();
+        testesService.testes();
 
-        fabricanteRepository.save(vw);
+        List<Contas> contasFromMotorista = testesService.getContasFromMotorista(1L);
+        contasFromMotorista.forEach(System.out::println);
 
-        Modelo gol = Modelo.builder()
-                .descricao("Gol")
-                .categoria(Categoria.HATCH_COMPACTO)
-                .fabricante(vw).build();
+        Optional<byte[]> fotoCarro = testesService.getFotoCarro();
 
-        modeloRepository.save(gol);
+        File file = new File("./src/main/resources/assets/novo_hibernate.png");
+        if (file.exists()) {
+            file.delete();
+        }
 
-        Acessorio arCondicionado = Acessorio.builder()
-                .descricao("Ar-condicionado")
-                .build();
+        fotoCarro.ifPresent(bytes -> {
 
-        acessorioRepository.save(arCondicionado);
+            try {
+                FileOutputStream fileOutputStream = new FileOutputStream("./src/main/resources/assets/novo_hibernate.png");
+                fileOutputStream.write(bytes);
+                fileOutputStream.close();
 
-        Acessorio vidros = Acessorio.builder()
-                .descricao("Vidros eletricos")
-                .build();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        acessorioRepository.save(vidros);
-
-
-        Carro golPreto = Carro.builder()
-                .modelo(gol)
-                .acessorios(Arrays.asList(arCondicionado, vidros))
-                .cor("Preto")
-                .build();
-
-        carroRepository.save(golPreto);
-
-        Aluguel aluguelGol = Aluguel.builder()
-                .carro(golPreto)
-                .valorTotal(new BigDecimal(500))
-                .apoliceSeguro(ApoliceSeguro.builder()
-                        .protecaoCausasNaturais(true)
-                        .protecaoRoubo(true)
-                        .valorFranquia(new BigDecimal(200))
-                        .build())
-                .dataPedido(Calendar.getInstance())
-                .dataEntrega(new Date())
-                .dataDevolucao(new Date())
-                .build();
-
-        aluguelRepository.save(aluguelGol);
-
-        Motorista diego = Motorista.builder()
-                .numeroCNH("1010")
-                .cpf("408596")
-                .dataNascimento(LocalDate.now())
-                .nome("Diego")
-                .sexo(Sexo.MASCULINO)
-                .build();
-
-        motoristaRepository.save(diego);
-
-
+        });
 
     }
+
+
 }

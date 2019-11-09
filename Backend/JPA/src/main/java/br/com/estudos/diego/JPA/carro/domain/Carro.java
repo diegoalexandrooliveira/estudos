@@ -42,4 +42,7 @@ public class Carro {
     @OneToMany(mappedBy = "carro")
     private List<Aluguel> alugueis;
 
+    @Lob
+    private byte[] foto;
+
 }
