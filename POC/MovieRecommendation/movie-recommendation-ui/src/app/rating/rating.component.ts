@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IUser } from '../models/IUser';
 import { IMovieRating } from '../models/IMovieRating';
 import { MovieRating } from '../models/movieRating';
+import jsonConfig from "../config.json";
 
 @Component({
   selector: 'app-rating',
@@ -23,7 +24,7 @@ export class RatingComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get<IUser[]>("http://localhost:8080/users")
+    this.httpClient.get<IUser[]>(jsonConfig.apiAddress + "/users")
       .subscribe((users: IUser[]) => {
         this.usersSelect = users.map(user => new Object({ value: user.id, label: user.name }));
       });
@@ -33,8 +34,8 @@ export class RatingComponent implements OnInit {
 
   onChangeUser() {
     let promises: Promise<Object>[] = [];
-    promises.push(this.httpClient.get("http://localhost:8080/movies").toPromise());
-    promises.push(this.httpClient.get<IMovieRating[]>("http://localhost:8080/ratings/" + this.user).toPromise<IMovieRating[]>());
+    promises.push(this.httpClient.get(jsonConfig.apiAddress + "/movies").toPromise());
+    promises.push(this.httpClient.get<IMovieRating[]>(jsonConfig.apiAddress + "/ratings/" + this.user).toPromise<IMovieRating[]>());
 
     Promise.all(promises).then(resolvedPromises => {
       let ratedMovies = <MovieRating[]>resolvedPromises[1];
@@ -83,17 +84,17 @@ export class RatingComponent implements OnInit {
     });
     let movieRate = new MovieRating(undefined, movie.imdbId, this.user, star["id"]);
     let headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.httpClient.post("http://localhost:8080/ratings", JSON.stringify(movieRate), {
+    this.httpClient.post(jsonConfig.apiAddress + "/ratings", JSON.stringify(movieRate), {
       headers: headers
     }).subscribe();
   }
 
   deleteAllRatings() {
-    this.httpClient.delete("http://localhost:8080/ratings/" + this.user).subscribe(() => this.onChangeUser());
+    this.httpClient.delete(jsonConfig.apiAddress + "/ratings/" + this.user).subscribe(() => this.onChangeUser());
   }
 
   public loadRecommendations() {
-    this.httpClient.get("http://localhost:8080/recommendations/" + this.user)
+    this.httpClient.get(jsonConfig.apiAddress + "/recommendations/" + this.user)
       .subscribe((movies: Object[]) => {
         this.recommendedMovies = movies.map(movie => new Movie(movie["imdbID"], movie["Title"],
           movie["Year"], movie["Poster"], movie["Metascore"], movie["Genre"], undefined));

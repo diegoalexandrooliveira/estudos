@@ -8,7 +8,7 @@ import { RatingComponent } from './rating/rating.component';
 import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
-  { path: '**', component: RatingComponent }
+  { path: 'ratings', component: RatingComponent }
 ];
 
 @NgModule({
