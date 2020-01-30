@@ -10,7 +10,7 @@ import { AuthService } from './core/auth-service.component';
 export class AppComponent implements OnInit {
 
 
-  title = 'ocid-angular';
+  title = 'OIDC Angular';
 
   isLoggedIn: boolean = false;
 
