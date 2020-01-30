@@ -50,3 +50,6 @@ testem.log
 Thumbs.db
 
 FrontEnd/portinari-tests/
+FrontEnd/ocid-angular/.editorconfig
+Backend/DesignPatterns/.idea/misc.xml
+FrontEnd/ocid-angular/package-lock.json
