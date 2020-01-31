@@ -11,6 +11,7 @@
 </ul>
 
 
-<button (click)="login()">Login</button>
+<button *ngIf="!isLoggedIn" (click)="login()">Login</button>
+<button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
 
 <router-outlet></router-outlet>
