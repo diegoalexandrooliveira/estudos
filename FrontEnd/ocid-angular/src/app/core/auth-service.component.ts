@@ -19,17 +19,18 @@ export class AuthService {
         const stsSettings: UserManagerSettings = {
             authority: environment.stsAuthority,
             client_id: environment.clientId,
-            redirect_uri: `${environment.clientRoot}signin-callback`,
-            // scope: "openid profile projects-api",
+            redirect_uri: `${environment.clientRoot}/signin-callback`,
+            scope: "openid profile api-default offline_access",
             response_type: "code",
-            post_logout_redirect_uri: `${environment.clientRoot}signout-callback`,
+            post_logout_redirect_uri: `${environment.clientRoot}/signout-callback`,
+            loadUserInfo: true,
             metadata: {
-                issuer: "https://dev--92-grqz.auth0.com/",
-                authorization_endpoint: "https://dev--92-grqz.auth0.com/authorize",
-                userinfo_endpoint: "https://dev--92-grqz.auth0.com/userinfo",
-                token_endpoint: "https://dev--92-grqz.auth0.com/oauth/token",
-                end_session_endpoint: `https://dev--92-grqz.auth0.com/logout?returnTo=${environment.clientRoot}signout-callback&client_id=${environment.clientId}`,
-                jwks_uri: "https://dev--92-grqz.auth0.com/.well-known/jwks.json"
+                issuer: `${environment.stsAuthority}/`,
+                authorization_endpoint: `${environment.stsAuthority}/authorize?audience=api-default`,
+                userinfo_endpoint: `${environment.stsAuthority}/userinfo`,
+                token_endpoint: `${environment.stsAuthority}/oauth/token`,
+                end_session_endpoint: `${environment.stsAuthority}/v2/logout?returnTo=${environment.clientRoot}/signout-callback&client_id=${environment.clientId}`,
+                jwks_uri: `${environment.stsAuthority}/.well-known/jwks.json`
             }
         };
 

@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  clientRoot: "http://localhost:4200/",
+  clientRoot: "http://localhost:4200",
   apiRoot: "http://localhost:8080/api/",
-  stsAuthority: "http://dev--92-grqz.auth0.com",
+  stsAuthority: "https://dev--92-grqz.auth0.com",
   clientId: "KbyjBfmRZ64AL2lpMwL26QBv7UaEQLmv"
 
 };
