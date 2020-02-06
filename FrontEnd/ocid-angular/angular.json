@@ -21,7 +21,8 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/silent_renew.html"
             ],
             "styles": [
               "src/styles.css"

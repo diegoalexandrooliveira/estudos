@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AuthService } from './core/auth-service.component';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-root',
@@ -14,24 +13,31 @@ export class AppComponent implements OnInit {
 
   isLoggedIn: boolean = false;
 
-  constructor(private _authService: AuthService) {
-    this._authService.loginChanged.subscribe(loggedIn => {
-      this.isLoggedIn = loggedIn;
-    })
+  constructor(private _authService: OidcSecurityService) {
 
   }
 
   ngOnInit(): void {
-    this._authService.isLoggedIn().then(isLogged => {
-      this.isLoggedIn = isLogged;
+    this._authService.getIsAuthorized().subscribe(auth => {
+      this.isLoggedIn = auth;
     });
+
+    this.getUser();
   }
 
   login() {
-    this._authService.login();
+    this._authService.authorize();
   }
 
   logout() {
-    this._authService.logout();
+    this._authService.logoff();
+  }
+
+  getUser() {
+    this._authService.getUserData().subscribe(userData => {
+      console.log(userData);
+
+    });
+
   }
 }

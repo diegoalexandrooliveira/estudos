@@ -11,7 +11,8 @@
 </ul>
 
 
-<button *ngIf="!isLoggedIn" (click)="login()">Login</button>
-<button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+<button  (click)="login()">Login</button>
+<button  (click)="logout()">Logout</button>
+<button  (click)="getUser()">User</button>
 
 <router-outlet></router-outlet>

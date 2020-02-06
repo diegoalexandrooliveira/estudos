@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { AuthService } from './core/auth-service.component';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
     selector: 'app-signin-callback',
@@ -9,11 +8,10 @@ import { AuthService } from './core/auth-service.component';
 })
 
 export class SigninCallbackComponent implements OnInit {
-    constructor(private _authService: AuthService, private router: Router) { }
+    constructor(private _authService: OidcSecurityService, private router: Router) { }
 
     ngOnInit() {
-        this._authService.completeLogin().then(() => {
-            this.router.navigate(['/'], { replaceUrl: true });
-        })
+        this._authService.authorizedImplicitFlowCallback(window.location.toString());
+        // this.router.navigate(['/'], { replaceUrl: true });
     }
 }
