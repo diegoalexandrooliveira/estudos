@@ -38,6 +38,8 @@ export class AppComponent implements OnInit {
       console.log(userData);
 
     });
+    console.log(this._authService.getToken());
+    
 
   }
 }

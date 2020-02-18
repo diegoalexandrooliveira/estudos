@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   clientRoot: "http://localhost:4200",
   apiRoot: "http://localhost:8080/api/",
-  stsAuthority: "https://totvs-agro-1.rac.dev.totvs.io/totvs.rac",
-  clientId: "AlexAuth"
+  stsAuthority: "http://localhost:8080/auth/realms/master",
+  clientId: "cliente-teste"
 
 };
 

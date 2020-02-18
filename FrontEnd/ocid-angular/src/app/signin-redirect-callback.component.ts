@@ -11,7 +11,7 @@ export class SigninCallbackComponent implements OnInit {
     constructor(private _authService: OidcSecurityService, private router: Router) { }
 
     ngOnInit() {
-        this._authService.authorizedImplicitFlowCallback(window.location.toString());
-        // this.router.navigate(['/'], { replaceUrl: true });
+        this._authService.authorizedCallbackWithCode(window.location.toString());
+        this.router.navigate(['/'], { replaceUrl: true });
     }
 }
