@@ -16,22 +16,32 @@ export class AuthService {
 
     constructor() {
 
+        // const stsSettings: UserManagerSettings = {
+        //     authority: environment.stsAuthority,
+        //     client_id: environment.clientId,
+        //     redirect_uri: `${environment.clientRoot}/signin-callback`,
+        //     scope: "openid profile api-default offline_access",
+        //     response_type: "code",
+        //     post_logout_redirect_uri: `${environment.clientRoot}/signout-callback`,
+        //     loadUserInfo: true,
+        //     metadata: {
+        //         issuer: `${environment.stsAuthority}/`,
+        //         authorization_endpoint: `${environment.stsAuthority}/authorize?audience=api-default`,
+        //         userinfo_endpoint: `${environment.stsAuthority}/userinfo`,
+        //         token_endpoint: `${environment.stsAuthority}/oauth/token`,
+        //         end_session_endpoint: `${environment.stsAuthority}/v2/logout?returnTo=${environment.clientRoot}/signout-callback&client_id=${environment.clientId}`,
+        //         jwks_uri: `${environment.stsAuthority}/.well-known/jwks.json`
+        //     }
+        // };
+
         const stsSettings: UserManagerSettings = {
             authority: environment.stsAuthority,
             client_id: environment.clientId,
             redirect_uri: `${environment.clientRoot}/signin-callback`,
-            scope: "openid profile api-default offline_access",
-            response_type: "code",
+            scope: "openid offline_access",
+            response_type: "id_token token",
             post_logout_redirect_uri: `${environment.clientRoot}/signout-callback`,
-            loadUserInfo: true,
-            metadata: {
-                issuer: `${environment.stsAuthority}/`,
-                authorization_endpoint: `${environment.stsAuthority}/authorize?audience=api-default`,
-                userinfo_endpoint: `${environment.stsAuthority}/userinfo`,
-                token_endpoint: `${environment.stsAuthority}/oauth/token`,
-                end_session_endpoint: `${environment.stsAuthority}/v2/logout?returnTo=${environment.clientRoot}/signout-callback&client_id=${environment.clientId}`,
-                jwks_uri: `${environment.stsAuthority}/.well-known/jwks.json`
-            }
+            loadUserInfo: false,
         };
 
         this._userManager = new UserManager(stsSettings);
