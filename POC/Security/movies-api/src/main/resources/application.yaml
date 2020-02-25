@@ -10,3 +10,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/movies
     username: postgres
     password: postgres
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/auth/realms/master
+        opaquetoken:
+          client-id: movies-app
