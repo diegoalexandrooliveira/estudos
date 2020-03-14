@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    vault:
+      host: localhost
+      port: 8200
+      scheme: http
+      token: ROOT TOKEN
+      generic:
+        enabled: true
+        backend: secret
+        application-name: meu-app
