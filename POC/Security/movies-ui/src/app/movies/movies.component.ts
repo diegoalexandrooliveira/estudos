@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PoPageAction } from '@portinari/portinari-ui';
+import { AfterViewChecked, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { PoButtonComponent, PoPageAction, PoPopoverComponent } from '@portinari/portinari-ui';
 
 import { MoviesService } from './movies.service';
 
@@ -21,9 +21,13 @@ export class MoviesComponent implements OnInit {
 
   constructor(private _moviesService: MoviesService) { }
 
+
+
   ngOnInit() {
     this._moviesService.getMovies()
-      .subscribe((movies: any[]) => this.items = movies);
-  }
+      .subscribe((movies: any[]) => {
+        this.items = movies;
+      });
 
+  }
 }

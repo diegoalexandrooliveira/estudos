@@ -17,3 +17,9 @@ spring:
           issuer-uri: http://localhost:8180/auth/realms/master
         opaquetoken:
           client-id: movies-app
+      box-office:
+        client-id: box-office-service
+        client-secret: ffdd65c5-c908-49bf-9d5b-32a5a016be58
+        accessTokenUri: http://localhost:8180/auth/realms/master/protocol/openid-connect/token
+box-office:
+  api: http://localhost:8081/api/boxOffice
