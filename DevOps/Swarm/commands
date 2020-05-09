@@ -1,0 +1,18 @@
+
+
+Iniciar a máquina no docker swarm:
+
+docker swarm init
+
+
+Iniciar um serviço:
+
+docker service create --health-cmd='curl -f http://localhost:8080/actuator/health' --health-interval=3s --health-timeout=3s --name swarm -p 8080:8080 --health-start-period=20s --replicas=3 swarm:3
+
+Para definir como down a saúde de um conteiner, realizar um get em api/status/disable
+
+curl -i http://localhost:8080/api/status/disable
+
+Para atualizar um serviço
+
+docker service update --image swarm:4 swarm
