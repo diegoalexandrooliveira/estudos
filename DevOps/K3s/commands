@@ -1,0 +1,20 @@
+Build da imagem no docker local
+
+docker build -t app_example:0.0.1 .
+
+
+Salvar a imagem como .tar
+
+docker save app_example:0.0.1 > app_example.tar
+
+Iniciar k3s
+
+sudo k3s server
+
+Importar imagem para o containerd do k3s
+
+sudo k3s ctr images import --base-name app_example:0.0.1 app_example.tar
+
+Aplicar a spec
+
+sudo k3s kubectl apply -f app_spec.yaml

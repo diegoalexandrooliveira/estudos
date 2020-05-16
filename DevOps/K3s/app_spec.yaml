@@ -1,0 +1,38 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-example-svc
+spec:
+  selector:
+    app: app-example
+  ports:
+  - protocol: "TCP"
+    port: 8080
+    targetPort: 8080
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-example
+  labels:
+    app: app-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-example
+  template:
+    metadata:
+      labels:
+        app: app-example
+    spec:
+      containers:
+      - name: app-example
+        image: docker.io/library/app_example:0.0.1
+        livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            periodSeconds: 5
+      restartPolicy: Always
