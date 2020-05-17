@@ -1,0 +1,5 @@
+Para o docker cli do container ter acesso ao docker daemon do host, é preciso fazer um bind com o docker.sock
+
+docker run --name docker -t -i -v /var/run/docker.sock:/var/run/docker.sock dind-test bash
+
+Isso não é um Docker in Docker (dind), o dind seria rodar um docker daemon dentro de um container
