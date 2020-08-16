@@ -1,0 +1,6 @@
+spring:
+  r2dbc:
+    username: postgres
+    password: postgres
+    url: r2dbc:postgres://localhost:5432/reativo
+debug: true

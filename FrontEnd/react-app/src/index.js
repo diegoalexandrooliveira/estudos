@@ -21,7 +21,7 @@ class Board extends React.Component {
     renderSquare(i) {
         let highlight;
         if (this.props.winner) {
-            highlight = this.props.winner.find((linha) => linha === i) != undefined;
+            highlight = this.props.winner.find((linha) => linha === i) !== undefined;
         }
         return <Square value={this.props.squares[i]}
             onClick={() => this.props.onClick(i)}
