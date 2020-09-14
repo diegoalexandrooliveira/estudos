@@ -1,14 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-
-import { Product } from '../product';
-import { ProductService } from '../product.service';
 import { GenericValidator } from '../../shared/generic-validator';
 import { NumberValidators } from '../../shared/number.validator';
-import { Store } from '@ngrx/store';
-import { ProductState, State, getCurrentProduct } from '../state/product.reducer';
+import { Product } from '../product';
+import { ProductService } from '../product.service';
+import * as ProductActions from '../state/product.actions';
+import { getCurrentProduct, State } from '../state/product.reducer';
+
+
 
 @Component({
   selector: 'pm-product-edit',
@@ -118,13 +119,13 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     if (product && product.id) {
       if (confirm(`Really delete the product: ${product.productName}?`)) {
         this.productService.deleteProduct(product.id).subscribe({
-          next: () => this.productService.changeSelectedProduct(null),
+          next: () => this.store.dispatch(ProductActions.initializeCurrentProduct()),
           error: err => this.errorMessage = err
         });
       }
     } else {
       // No need to delete, it was never saved
-      this.productService.changeSelectedProduct(null);
+      this.store.dispatch(ProductActions.initializeCurrentProduct());
     }
   }
 
@@ -138,12 +139,12 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
         if (product.id === 0) {
           this.productService.createProduct(product).subscribe({
-            next: p => this.productService.changeSelectedProduct(p),
+            next: p => this.store.dispatch(ProductActions.setCurrentProduct({ product: p })),
             error: err => this.errorMessage = err
           });
         } else {
           this.productService.updateProduct(product).subscribe({
-            next: p => this.productService.changeSelectedProduct(p),
+            next: p => this.store.dispatch(ProductActions.setCurrentProduct({ product: p })),
             error: err => this.errorMessage = err
           });
         }

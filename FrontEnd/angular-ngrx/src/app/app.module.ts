@@ -14,6 +14,7 @@ import { WelcomeComponent } from './home/welcome.component';
 import { ProductData } from './products/product-data';
 import { UserModule } from './user/user.module';
 import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 // Imports for loading & configuring the in-memory web api
 /* Feature Modules */
@@ -29,7 +30,8 @@ import { environment } from 'src/environments/environment';
       name: 'NgRx DevTools',
       maxAge: 25,
       logOnly: environment.production
-    })
+    }),
+    EffectsModule.forRoot([])
   ],
   declarations: [
     AppComponent,

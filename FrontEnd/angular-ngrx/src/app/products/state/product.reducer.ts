@@ -1,8 +1,8 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-
 import * as AppState from '../../state/app.state';
 import { Product } from '../product';
 import * as Actions from './product.actions';
+
 
 export interface State extends AppState.State {
   products: ProductState;
@@ -32,6 +32,11 @@ export const getCurrentProduct = createSelector(
   productsState => productsState.currentProduct
 );
 
+export const getProducts = createSelector(
+  featureSelector,
+  productsState => productsState.products
+);
+
 
 export const productReducer = createReducer<ProductState>(
   initialState,
@@ -46,5 +51,23 @@ export const productReducer = createReducer<ProductState>(
       ...state,
       currentProduct: action.product
     }
+  }),
+  on(Actions.initializeCurrentProduct, (state): ProductState => {
+    return {
+      ...state,
+      currentProduct: {
+        description: '',
+        id: 0,
+        productCode: '',
+        productName: '',
+        starRating: 1
+      }
+    }
+  }),
+  on(Actions.loadProductsSuccess, (state, action): ProductState => {
+    return {
+      ...state,
+      products: action.products
+    };
   })
 );
