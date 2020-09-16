@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Product } from '../product';
-import { ProductService } from '../product.service';
 import * as ProductActions from '../state/product.actions';
-import { showProductCodeSelector, State, getCurrentProduct, getProducts } from '../state/product.reducer';
+import { getCurrentProduct, getError, getProducts, showProductCodeSelector, State } from '../state/product.reducer';
 
 
 
@@ -15,13 +14,13 @@ import { showProductCodeSelector, State, getCurrentProduct, getProducts } from '
 })
 export class ProductListComponent implements OnInit {
   pageTitle = 'Products';
-  errorMessage: string;
 
   products$: Observable<Product[]>;
   currentProduct$: Observable<Product>;
   displayProductCode$: Observable<boolean>;
+  getError$: Observable<string>;
 
-  constructor(private productService: ProductService, private store: Store<State>) { }
+  constructor(private store: Store<State>) { }
 
   ngOnInit(): void {
     this.currentProduct$ = this.store.select(getCurrentProduct);
@@ -31,6 +30,8 @@ export class ProductListComponent implements OnInit {
     this.store.dispatch(ProductActions.loadProducts());
 
     this.displayProductCode$ = this.store.select(showProductCodeSelector);
+
+    this.getError$ = this.store.select(getError);
   }
 
   checkChanged(): void {
@@ -42,7 +43,7 @@ export class ProductListComponent implements OnInit {
   }
 
   productSelected(product: Product): void {
-    this.store.dispatch(ProductActions.setCurrentProduct({ product }));
+    this.store.dispatch(ProductActions.setCurrentProduct({ productId: product.id }));
   }
 
 }
