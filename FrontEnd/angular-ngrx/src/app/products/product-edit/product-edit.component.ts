@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 import { GenericValidator } from '../../shared/generic-validator';
 import { NumberValidators } from '../../shared/number.validator';
 import { Product } from '../product';
-import * as ProductActions from '../state/product.actions';
-import { getCurrentProduct, getError, State } from '../state/product.reducer';
+import { getCurrentProduct, getError, State } from '../state';
+import { ProductPageActions } from '../state/actions';
 
 
 
@@ -115,11 +114,11 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   deleteProduct(product: Product): void {
     if (product && product.id) {
       if (confirm(`Really delete the product: ${product.productName}?`)) {
-        this.store.dispatch(ProductActions.deleteProduct({ productId: product.id }))
+        this.store.dispatch(ProductPageActions.deleteProduct({ productId: product.id }))
       }
     } else {
       // No need to delete, it was never saved
-      this.store.dispatch(ProductActions.initializeCurrentProduct());
+      this.store.dispatch(ProductPageActions.initializeCurrentProduct());
     }
   }
 
@@ -132,9 +131,9 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         const product = { ...originalProduct, ...this.productForm.value };
 
         if (product.id === 0) {
-          this.store.dispatch(ProductActions.createProduct({ product }));
+          this.store.dispatch(ProductPageActions.createProduct({ product }));
         } else {
-          this.store.dispatch(ProductActions.updateProduct({ product }));
+          this.store.dispatch(ProductPageActions.updateProduct({ product }));
         }
       }
     }
