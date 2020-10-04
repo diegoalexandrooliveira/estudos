@@ -1,0 +1,10 @@
+
+
+<div *ngFor="let produto of produtos$ | async">
+  <p>{{produto.id}}</p>
+  <p>{{produto.descricao}}</p>
+</div>
+
+<div *ngFor="let categoria of categorias$ | async">
+  <p>{{categoria.descricao}}</p>
+</div>
