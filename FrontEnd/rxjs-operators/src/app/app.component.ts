@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { mergeMap, toArray } from 'rxjs/operators';
+import { mergeMap, switchMap, toArray } from 'rxjs/operators';
 import { AppService } from './app.service';
 import { Categoria } from './categoria';
 import { Produto } from './produto';
