@@ -1,7 +1,6 @@
-import { Heroi } from '../heroi';
-import { HeroiService } from '../heroi.service';
-import { HeroisComponent } from "./herois.component";
 import { of } from 'rxjs';
+import { Heroi } from '../heroi';
+import { HeroisComponent } from "./herois.component";
 
 
 describe('HeroisComponent', () => {
@@ -52,6 +51,14 @@ describe('HeroisComponent', () => {
       expect(heroisComponent.herois).toContain(herois[1]);
       expect(heroisComponent.herois).toContain(herois[2]);
 
+    });
+
+    it('deve chamar o excluirHeroi', () => {
+      heroisComponent.herois = herois;
+
+      heroisComponent.excluir(herois[0]);
+
+      expect(mockHeroiService.excluirHeroi).toHaveBeenCalledWith(herois[0]);
     });
   });
 

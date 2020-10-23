@@ -1,0 +1,4 @@
+<a routerLink="/detail/{{ heroi.id }}">
+  <span class="badge">{{ heroi.id }}</span> {{ heroi.nome }}
+</a>
+<button class="delete" (click)="onExcluirClick($event)">x</button>
