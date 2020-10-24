@@ -8,7 +8,21 @@ export class HeroiService {
   constructor(private httpClient: HttpClient) { }
 
   getHerois(): Observable<Heroi[]> {
-    return of([]);
+    return of([{
+      id: 1,
+      forca: 8,
+      nome: 'Spider-Man'
+    },
+    {
+      id: 2,
+      forca: 24,
+      nome: 'Wonder Woman'
+    },
+    {
+      id: 3,
+      forca: 55,
+      nome: 'Super-man'
+    }]);
   }
 
   adicionaHeroi(heroi: Heroi) {

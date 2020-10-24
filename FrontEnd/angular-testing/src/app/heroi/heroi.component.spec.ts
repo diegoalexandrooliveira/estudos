@@ -1,5 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
 import { HeroiComponent } from './heroi.component';
@@ -42,6 +43,10 @@ describe('HeroiComponent (shallow)', () => {
 
     fixture.detectChanges();
 
+    // DebugElement
+    expect(fixture.debugElement.query(By.css('a')).nativeElement.textContent).toContain('Wolverine');
+
+    // NativeElement
     expect(fixture.nativeElement.querySelector('a').textContent).toContain('Wolverine');
   });
 

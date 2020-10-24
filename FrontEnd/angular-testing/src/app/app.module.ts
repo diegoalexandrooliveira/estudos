@@ -4,19 +4,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeroisComponent } from './herois/herois.component';
 import { HeroiComponent } from './heroi/heroi.component';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { HeroiService } from './heroi.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeroisComponent,
-    HeroiComponent
+    HeroiComponent,
+    HeroisComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HeroiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

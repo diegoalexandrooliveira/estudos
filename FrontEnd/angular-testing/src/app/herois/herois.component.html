@@ -1,0 +1,15 @@
+<h2>Herois</h2>
+
+<div>
+  <label>Nome do heroi: <input type="text" #nomeHeroi /></label>
+
+  <button (click)="adicionar(nomeHeroi.value)">
+    Adicionar
+  </button>
+</div>
+
+<ul>
+  <li *ngFor="let heroi of herois">
+    <app-heroi [heroi]="heroi" (excluir)="excluir(heroi)"></app-heroi>
+  </li>
+</ul>
