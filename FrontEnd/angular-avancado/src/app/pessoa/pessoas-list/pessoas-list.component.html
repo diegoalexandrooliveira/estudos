@@ -1,0 +1,7 @@
+<div *ngIf="pessoas$ | async as pessoas">
+  <ul>
+    <li *ngFor="let pessoa of pessoas">
+      {{pessoa.id}} - {{pessoa.nome}}
+    </li>
+  </ul>
+</div>

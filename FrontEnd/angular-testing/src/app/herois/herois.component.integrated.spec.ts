@@ -34,8 +34,7 @@ describe('HeroisComponent (integrated)', () => {
       declarations: [HeroisComponent],
       providers: [{
         provide: HeroiService, useValue: mockService
-      }],
-      schemas: [NO_ERRORS_SCHEMA]
+      }]
     });
 
     fixture = TestBed.createComponent(HeroisComponent);
