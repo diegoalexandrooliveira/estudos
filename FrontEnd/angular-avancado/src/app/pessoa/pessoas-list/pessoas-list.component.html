@@ -1,7 +1,26 @@
+<label for="nome">Nome</label>
+<input id="nome" type="text" [(ngModel)]="nome">
+
 <div *ngIf="pessoas$ | async as pessoas">
   <ul>
     <li *ngFor="let pessoa of pessoas">
-      {{pessoa.id}} - {{pessoa.nome}}
+      {{transformaID(pessoa.id)}} - {{pessoa.nome}}
+    </li>
+  </ul>
+</div>
+<p>Lista sem usar função no ID</p>
+<div *ngIf="pessoas$ | async as pessoas">
+  <ul>
+    <li *ngFor="let pessoa of pessoas">
+      {{$any(pessoa).novoID}} - {{pessoa.nome}}
+    </li>
+  </ul>
+</div>
+<p>Lista usando pipe</p>
+<div *ngIf="pessoas$ | async as pessoas">
+  <ul>
+    <li *ngFor="let pessoa of pessoas">
+      {{pessoa.id |transformaId}} - {{pessoa.nome}}
     </li>
   </ul>
 </div>
