@@ -1,8 +1,6 @@
 package diegoalexandrooliveira.designpatterns.strategy.impostos;
 
 
-import diegoalexandrooliveira.designpatterns.strategy.Orcamento;
-
 public class ICMS implements Imposto {
 
 

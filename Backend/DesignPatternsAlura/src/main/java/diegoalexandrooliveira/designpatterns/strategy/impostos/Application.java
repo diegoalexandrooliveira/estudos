@@ -1,8 +1,4 @@
-package diegoalexandrooliveira.designpatterns.strategy;
-
-import diegoalexandrooliveira.designpatterns.strategy.impostos.ICCC;
-import diegoalexandrooliveira.designpatterns.strategy.impostos.ICMS;
-import diegoalexandrooliveira.designpatterns.strategy.impostos.ISS;
+package diegoalexandrooliveira.designpatterns.strategy.impostos;
 
 public class Application {
 

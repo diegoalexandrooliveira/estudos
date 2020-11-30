@@ -1,7 +1,5 @@
-package diegoalexandrooliveira.designpatterns.strategy;
+package diegoalexandrooliveira.designpatterns.strategy.impostos;
 
-
-import diegoalexandrooliveira.designpatterns.strategy.impostos.Imposto;
 
 public class CalculadorDeImposto {
 

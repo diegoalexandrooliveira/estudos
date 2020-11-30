@@ -1,4 +1,4 @@
-package diegoalexandrooliveira.designpatterns.strategy;
+package diegoalexandrooliveira.designpatterns.strategy.impostos;
 
 public class Orcamento {
 

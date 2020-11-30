@@ -1,7 +1,5 @@
 package diegoalexandrooliveira.designpatterns.strategy.impostos;
 
-import diegoalexandrooliveira.designpatterns.strategy.Orcamento;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
