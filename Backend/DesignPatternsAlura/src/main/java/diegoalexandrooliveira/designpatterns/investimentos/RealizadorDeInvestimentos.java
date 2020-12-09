@@ -1,4 +1,4 @@
-package diegoalexandrooliveira.designpatterns.strategy.investimentos;
+package diegoalexandrooliveira.designpatterns.investimentos;
 
 public class RealizadorDeInvestimentos {
 

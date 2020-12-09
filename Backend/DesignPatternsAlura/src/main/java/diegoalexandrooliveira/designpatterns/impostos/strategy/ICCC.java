@@ -1,4 +1,6 @@
-package diegoalexandrooliveira.designpatterns.strategy.impostos;
+package diegoalexandrooliveira.designpatterns.impostos.strategy;
+
+import diegoalexandrooliveira.designpatterns.impostos.Orcamento;
 
 import java.util.Arrays;
 import java.util.List;
