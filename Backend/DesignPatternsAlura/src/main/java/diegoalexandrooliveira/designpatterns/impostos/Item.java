@@ -12,6 +12,10 @@ public class Item {
         this.valor = valor;
     }
 
+    public double getValor() {
+        return valor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

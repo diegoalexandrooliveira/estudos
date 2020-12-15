@@ -26,4 +26,10 @@ public class Orcamento {
     public List<Item> getItens() {
         return Collections.unmodifiableList(itens);
     }
+
+    public boolean possuiItemPrecoMaiorQueCem() {
+        return itens
+                .stream()
+                .anyMatch(item -> item.getValor() > 100);
+    }
 }
