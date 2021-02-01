@@ -1,0 +1,7 @@
+FROM openjdk:11.0-jre-slim-buster
+
+WORKDIR /app
+
+COPY ./target/tacocloud-0.0.1-SNAPSHOT.jar /app/app.jar
+
+ENTRYPOINT exec java -jar app.jar
