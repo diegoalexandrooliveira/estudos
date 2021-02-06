@@ -1,0 +1,8 @@
+cloud:
+  aws:
+    credentials:
+      access-key:
+      secret-key:
+      instance-profile: false
+    region:
+      static: us-east-2
