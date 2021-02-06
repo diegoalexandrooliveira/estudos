@@ -17,7 +17,7 @@ public class AWSConfiguration {
 
     @Bean
     @Primary
-    public AmazonSQSAsync bean() {
+    public AmazonSQSAsync bean(){
         return AmazonSQSAsyncClientBuilder.standard()
                 .withEndpointConfiguration(
                         new AwsClientBuilder.EndpointConfiguration(url, "us-east-2"))
